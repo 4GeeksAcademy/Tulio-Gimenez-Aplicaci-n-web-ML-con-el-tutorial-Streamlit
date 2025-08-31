@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import joblib
@@ -15,7 +16,8 @@ except FileNotFoundError:
     st.error("Error: Archivos de modelo o escalador no encontrados. Asegúrese de que 'kmeans_model.joblib' y 'scaler_clustering.joblib' estén en el mismo directorio que 'app.py'.")
     st.stop() 
 
-# Agregar CSS personalizado para estilizar (Opcional pero recomendado)
+
+
 st.markdown("""
 <style>
 .main-title {
