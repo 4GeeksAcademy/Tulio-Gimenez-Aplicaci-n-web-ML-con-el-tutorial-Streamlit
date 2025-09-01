@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import joblib
@@ -13,9 +12,8 @@ try:
     scaler_clustering = joblib.load("src/scaler_clustering.joblib")
 
 except FileNotFoundError:
-    st.error("Error: Archivos de modelo o escalador no encontrados. Asegúrese de que 'kmeans_model.joblib' y 'scaler_clustering.joblib' estén en el mismo directorio que 'app.py'.")
+    st.error("Error: Archivos de modelo o escalador no encontrados. Asegúrese de que kmeans_model.joblib y scaler_clustering.joblib estén en el mismo directorio que app.py.")
     st.stop() 
-
 
 
 st.markdown("""
@@ -72,7 +70,7 @@ cluster_descriptions = {
     5: "Área de vivienda de valor bajo y densidad media"
 }
 
-#  Cargar datos originales y calcular rangos 
+# Cargamos los datos originales y calculamos rangos 
 
 try:
 
@@ -91,7 +89,7 @@ except Exception as e:
 
 
 
-# Título principal con clase personalizada
+# Titulo principal
 
 st.markdown('<h1 class="main-title">Predicción de Clúster de Vivienda (K-Means)</h1>', unsafe_allow_html=True)
 
@@ -99,7 +97,7 @@ st.write("Ingrese las características de la vivienda para predecir a qué clús
 
 
 
-# Rangos de Datos de Entrenamiento
+# Rangos de Datos
 
 if data_load_success:
     st.header("Rangos de Datos:")
@@ -138,3 +136,32 @@ if st.button("Predecir Clúster"):
 
 st.markdown("---")
 st.markdown("Aplicación web para demostración de K-Means.")
+
+
+
+
+
+import os
+
+
+target_directory = "src"
+
+required_files = ["app.py", "requirements.txt", "kmeans_model.joblib", "scaler_clustering.joblib"]
+all_files_present = True
+
+print(f"Verificando archivos requeridos para el despliegue en la carpeta: {target_directory if target_directory else 'raíz del directorio'}")
+
+for file in required_files:
+
+    file_path = os.path.join(target_directory, file) if target_directory else file
+
+    if os.path.exists(file_path):
+        print(f"- {file_path}: Encontrado y listo.")
+    else:
+        print(f"- {file_path}: No encontrado.")
+        all_files_present = False
+
+if all_files_present:
+    print("\nTodos los archivos requeridos están presentes en la carpeta especificada y listos para ser subidos al repositorio.")
+else:
+    print("\nFaltan algunos archivos requeridos en la carpeta especificada. Por favor, revisa los pasos anteriores.")
